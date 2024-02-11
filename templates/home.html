@@ -1,0 +1,32 @@
+{% extends '_base.html' %}
+
+{% block title%} Home {% endblock %}
+
+{% block content %}
+    <style>
+        .login-link {
+            text-decoration: none;
+            color: white ;
+        }
+    </style>
+
+    <h1>This is our home page</h1>
+    
+    {% if user.is_authenticated %}
+        <p>Hi {{user.email}} </p>
+        <form id="logoutForm" method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+    {% else %}
+        <p>User is not logged in</p>
+        <button>
+            <a class="login-link" href="{% url 'login' %}">Log In</a>
+        </button>
+        <button>
+            <a class="login-link" href="{% url 'signup' %}">Sign Up</a>
+        </button>
+    {% endif %}
+        
+{% endblock content %}
+    
