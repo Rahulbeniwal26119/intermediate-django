@@ -1,0 +1,17 @@
+.logoutButton {
+    /*  */
+    outline: none;
+    border: none;
+    text-decoration: none;
+    background: none;
+    color: white;
+}
+
+.logoutButton:hover {
+    text-decoration: underline;
+}
+
+body {
+    min-height: 75rem;
+    padding-top: 4.5rem;
+}

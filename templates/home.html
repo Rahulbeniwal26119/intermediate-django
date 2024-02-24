@@ -1,5 +1,5 @@
 {% extends '_base.html' %}
-
+{% load static %}
 {% block title%} Home {% endblock %}
 
 {% block content %}
@@ -8,15 +8,19 @@
             text-decoration: none;
             color: white ;
         }
+        .internal-logout {
+            color: black;
+        }
     </style>
 
     <h1>This is our home page</h1>
+    <img src="{% static 'images/code.png' %}" alt="code.png" height="100px" width="100px">
     
     {% if user.is_authenticated %}
         <p>Hi {{user.email}} </p>
         <form id="logoutForm" method="post" action="{% url 'logout' %}">
             {% csrf_token %}
-            <button type="submit">Logout</button>
+            <button type="submit" class="logoutButton internal-logout">Logout</button>
         </form>
     {% else %}
         <p>User is not logged in</p>
