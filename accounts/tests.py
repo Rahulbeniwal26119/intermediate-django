@@ -50,7 +50,7 @@ class SignUpUserTest(TestCase):
         self.assertTemplateUsed(self.response, "account/signup.html")
     
     def test_signup_form(self):
-        new_user = get_user_model().objects.create_user(
+        get_user_model().objects.create_user(
             self.user_name,
             self.email
         )
