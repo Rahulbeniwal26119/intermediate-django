@@ -41,8 +41,11 @@ INSTALLED_APPS = [
     "django_extensions",
     "crispy_forms",
     "crispy_bootstrap5",
+    "allauth",
+    "allauth.account",
+    # LOCAL APPS
     "accounts",
-    "pages"
+    "pages",
 ]
 
 MIDDLEWARE = [
@@ -53,6 +56,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # allauth specific middleware
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = "advance_django.urls"
@@ -60,9 +65,7 @@ ROOT_URLCONF = "advance_django.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [
-            BASE_DIR / "templates"
-        ],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -88,7 +91,7 @@ DATABASES = {
         "USER": "myuser",
         "PASSWORD": "mypassword",
         "HOST": "database",
-        "PORT": "5433"
+        "PORT": "5433",
     }
 }
 
@@ -136,12 +139,33 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_REDIRECT_URL = "homepage"
 LOGOUT_REDIRECT_URL = "homepage"
-STATICFILES_DIRS = [
-    BASE_DIR / "static"
-]
+STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
 # django-crispy-forms
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+# django-allauth configuration
+SIDE_ID = "1"
+ACCOUNT_LOGOUT_REDIRECT = "homepage"
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = (
+    False  # Now the user will not have to enter the password twice during registration.
+)
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+LOGIN_ON_EMAIL_CONFIRMATION = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
+# django-allauth will send such an email upon a successful user registration, which we can and
+# will customize later, but since we don’t yet have a SMTP server properly configured, it will result
+# in an error.
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
