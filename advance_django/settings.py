@@ -89,14 +89,6 @@ WSGI_APPLICATION = "advance_django.wsgi.application"
 
 DATABASES = {
     "default": env.dj_db_url("DATABASE_URL")
-    # "default": {
-    #     "ENGINE": "django.db.backends.postgresql",
-    #     "NAME": env("POSTGRES_DB"),
-    #     "USER": env("POSTGRES_USER"),
-    #     "PASSWORD": env("POSTGRES_PASSWORD"),
-    #     "HOST": "database",
-    #     "PORT": env("POSTGRES_PORT"),
-    # }
 }
 
 
