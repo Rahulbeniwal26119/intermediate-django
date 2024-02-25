@@ -13,14 +13,12 @@ services:
       - .:/code
     depends_on:
       - database
+    env_file:
+      - web_config.env
   database:
     image: postgres:13
-    environment:
-      POSTGRES_DB: mydb
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
-      POSTGRESQL_PORT: 5433
-      # POSTGRES_HOST_AUTH_METHOD: trust
+    env_file:
+      - db_config.env
     expose:
       - "5433"
     ports:
