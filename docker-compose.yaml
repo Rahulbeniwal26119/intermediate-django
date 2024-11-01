@@ -1,6 +1,7 @@
 services:
   web:
-    image: advance_django
+    # build the image
+    build: .
     ports:
       - "8000:8000"
     # Add command for make migraions and migrate
@@ -15,16 +16,18 @@ services:
       - database
     env_file:
       - web_config.env
+    container_name: web
   database:
     image: postgres:13
     env_file:
       - db_config.env
     expose:
-      - "5433"
+      - "5432"
     ports:
-      - "5433:5433"
+      - "5433:5432"
     volumes:
       - postgresql_data:/var/lib/postgresql/data
-    command: -p 5433
+    command: -p 5432
+    container_name: database
 volumes:
   postgresql_data:

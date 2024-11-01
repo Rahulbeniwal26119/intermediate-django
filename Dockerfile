@@ -7,10 +7,11 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 WORKDIR /code
-RUN pip install requests
+RUN pip install uv
+RUN uv pip install requests
 
 COPY ./requirements.txt .
-RUN pip install -r requirements.txt
+RUN uv pip install -r requirements.txt
 
 # COPY PROJECT
 COPY . .

@@ -1,5 +1,5 @@
 venv/
 *.pyc
-web_config.env
-db_config.env
+#web_config.env
+#db_config.env
 
