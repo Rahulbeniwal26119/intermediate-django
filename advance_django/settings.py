@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 from environs import Env
+import os
 
 env = Env()
 env.read_env()
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
     # THIRD PARTY APPS
     "django_extensions",
     "crispy_forms",
@@ -49,6 +51,7 @@ INSTALLED_APPS = [
     # LOCAL APPS
     "accounts",
     "pages",
+    "token_bucket"
 ]
 
 MIDDLEWARE = [
@@ -172,6 +175,25 @@ CACHES = {
         "LOCATION": env("REDIS_URL"),
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "file": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(BASE_DIR, "debug.log"),
+        }
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["file"],
+            "level": "DEBUG",
+            "propagate": True,
         }
     }
 }
