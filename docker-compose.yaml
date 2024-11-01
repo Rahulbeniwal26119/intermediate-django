@@ -29,5 +29,10 @@ services:
       - postgresql_data:/var/lib/postgresql/data
     command: -p 5432
     container_name: database
+  redis:
+    image: redis:6
+    ports:
+      - "6379:6379"
+    container_name: redis
 volumes:
   postgresql_data:

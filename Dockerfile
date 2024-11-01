@@ -8,10 +8,10 @@ ENV PYTHONUNBUFFERED 1
 
 WORKDIR /code
 RUN pip install uv
-RUN uv pip install requests
+RUN uv pip install --system requests
 
 COPY ./requirements.txt .
-RUN uv pip install -r requirements.txt
+RUN uv pip install --system -r requirements.txt
 
 # COPY PROJECT
 COPY . .
