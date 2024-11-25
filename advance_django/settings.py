@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     # LOCAL APPS
     "accounts",
     "pages",
-    "token_bucket"
+    "token_bucket",
+    "orm"
 ]
 
 MIDDLEWARE = [
@@ -91,7 +92,11 @@ WSGI_APPLICATION = "advance_django.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    "default": env.dj_db_url("DATABASE_URL")
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3")
+    }
+    # "default": env.dj_db_url("DATABASE_URL")
 }
 
 
