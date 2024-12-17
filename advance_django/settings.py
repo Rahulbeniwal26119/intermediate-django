@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     "accounts",
     "pages",
     "token_bucket",
-    "orm"
+    "orm",
+    "proxy_models"
 ]
 
 MIDDLEWARE = [
